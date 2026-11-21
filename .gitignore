@@ -1,24 +1,46 @@
 # Python
 __pycache__/
 *.py[cod]
-.pytest_cache/
+*.egg-info/
+dist/
+build/
 
-# Virtual environment
+# Virtual environments
 .venv/
 venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# Dataset
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Model artifacts
+artifacts/*
+!artifacts/.gitkeep
+*.pt
+*.pth
+*.onnx
+
+# Experiment tracking
+mlruns/
+mlartifacts/
+
+# Reports generated locally
+reports/figures/*
+reports/metrics/*
 
 # Environment variables
 .env
 
-# IDE
-.idea/
-
 # Jupyter
 .ipynb_checkpoints/
 
-# Datasets
-data/raw/*
-!data/raw/.gitkeep
-
-data/processed/*
-!data/processed/.gitkeep
+# OS
+.DS_Store
+Thumbs.db
