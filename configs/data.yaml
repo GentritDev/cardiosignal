@@ -1,0 +1,84 @@
+
+# CardioSignal - Dataset Configuration
+
+dataset:
+  name: "PTB-XL"
+  version: "1.0.3"
+  root: "ptb-xl-1.0.3"
+
+  metadata_file: "ptbxl_database.csv"
+  statements_file: "scp_statements.csv"
+
+  records:
+    high_resolution: "records500"
+    low_resolution: "records100"
+
+  sampling_rate: 500
+  duration_seconds: 10
+  num_samples: 5000
+  num_leads: 12
+
+  lead_names:
+    - "I"
+    - "II"
+    - "III"
+    - "AVR"
+    - "AVL"
+    - "AVF"
+    - "V1"
+    - "V2"
+    - "V3"
+    - "V4"
+    - "V5"
+    - "V6"
+
+labels:
+  task: "multi_label_classification"
+
+  classes:
+    - "NORM"
+    - "MI"
+    - "STTC"
+    - "CD"
+    - "HYP"
+
+  scp_codes_column: "scp_codes"
+
+  exclude_unlabeled: true
+
+splits:
+  strategy: "official_patient_stratified"
+
+  fold_column: "strat_fold"
+  patient_id_column: "patient_id"
+
+  train:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+
+  validation:
+    - 9
+
+  test:
+    - 10
+
+reproducibility:
+  seed: 42
+
+preprocessing:
+  input_layout: "time_channels"
+  output_layout: "channels_time"
+
+  normalization:
+    method: "train_set_per_lead_zscore"
+    epsilon: 1.0e-8
+    reject_non_finite: true
+
+  statistics:
+    save_path: "artifacts/normalization_stats.json"

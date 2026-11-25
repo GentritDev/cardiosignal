@@ -1,9 +1,14 @@
+
 # Python
 __pycache__/
 *.py[cod]
 *.egg-info/
 dist/
 build/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
 # Virtual environments
 .venv/
@@ -14,32 +19,44 @@ env/
 .idea/
 .vscode/
 
-# Dataset
+# Dataset - PTB-XL
+ptb-xl-1.0.3/
 data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
-# Model artifacts
+# Model artifacts and checkpoints
 artifacts/*
 !artifacts/.gitkeep
 *.pt
 *.pth
 *.onnx
+*.ckpt
 
 # Experiment tracking
 mlruns/
 mlartifacts/
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal/
 
 # Reports generated locally
 reports/figures/*
 reports/metrics/*
 
-# Environment variables
+# Environment variables and secrets
 .env
+.env.*
+!.env.example
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
 
 # OS
 .DS_Store

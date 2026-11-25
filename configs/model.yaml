@@ -1,0 +1,27 @@
+
+model:
+  task: multi_label_classification
+  input_channels: 12
+  num_classes: 5
+  class_names:
+    - NORM
+    - MI
+    - STTC
+    - CD
+    - HYP
+
+  architecture:
+    default: resnet1d
+
+    cnn1d:
+      channels: [32, 64, 128, 256]
+      dropout: 0.3
+
+    resnet1d:
+      channels: [32, 64, 128, 256]
+      blocks_per_stage: [2, 2, 2, 2]
+      dropout: 0.3
+
+  output:
+    type: logits
+    activation_for_inference: sigmoid
