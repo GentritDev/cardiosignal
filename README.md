@@ -215,6 +215,81 @@ The evaluation pipeline reports multi-label metrics including:
 
 The configured default classification threshold is `0.5`. For a rigorous final evaluation, keep the test split untouched during model selection and threshold tuning; use validation data for those decisions.
 
+
+## Model Results
+
+A ResNet1D model was trained and evaluated using PTB-XL v1.0.3.
+
+### Training Summary
+
+| Configuration | Value |
+|---|---|
+| Architecture | ResNet1D |
+| Maximum epochs | 50 |
+| Completed epochs | 32 |
+| Best checkpoint epoch | 22 |
+| Best validation macro F1 | 0.74779 |
+| Batch size | 32 |
+| Optimizer | AdamW |
+| Loss | BCEWithLogitsLoss |
+| Early stopping patience | 10 |
+
+### Test Set Performance
+
+The best checkpoint was evaluated on the held-out test set containing 2,158 ECG recordings.
+
+| Metric | Score |
+|---|---:|
+| Macro F1 | 0.75474 |
+| Micro F1 | 0.78962 |
+| Macro AUROC | 0.93206 |
+| Macro AUPRC | 0.83157 |
+| Test Loss | 0.26717 |
+
+Classification threshold: `0.5`.
+
+### Per-Class Performance
+
+| Class | F1 | AUROC | AUPRC |
+|---|---:|---:|---:|
+| NORM | 0.8695 | 0.9498 | 0.9339 |
+| MI | 0.7537 | 0.9381 | 0.8626 |
+| STTC | 0.7697 | 0.9351 | 0.8299 |
+| CD | 0.7581 | 0.9254 | 0.8533 |
+| HYP | 0.6227 | 0.9120 | 0.6782 |
+
+### Test Metrics Visualization
+
+![Test metrics comparison](test_metrics_comparison.png)
+
+### Per-Class Confusion Matrices
+
+**NORM**
+
+![NORM confusion matrix](confusion_matrix_NORM.png)
+
+**MI**
+
+![MI confusion matrix](confusion_matrix_MI.png)
+
+**STTC**
+
+![STTC confusion matrix](confusion_matrix_STTC.png)
+
+**CD**
+
+![CD confusion matrix](confusion_matrix_CD.png)
+
+**HYP**
+
+![HYP confusion matrix](confusion_matrix_HYP.png)
+
+### Evaluation Notes
+
+- NORM achieved the highest F1 score.
+- HYP was the most challenging class, with an F1 score of 0.6227.
+- Results represent experimental performance on the PTB-XL benchmark and do not constitute clinical validation.
+
 ## Experiment tracking
 
 Training configuration enables MLflow tracking with a local SQLite backend:
@@ -263,6 +338,12 @@ Also consider citing the original dataset paper:
 
 > Wagner, P., et al. (2020). PTB-XL: A Large Publicly Available ECG Dataset. *Scientific Data*, 7, 154. https://doi.org/10.1038/s41597-020-0495-6
 
-## Current project status
 
-The data pipeline, model implementations, training/evaluation modules, and automated tests are implemented. The current test suite passes. Full GPU training, final model comparison, finalized benchmark metrics, and deployment validation remain separate steps; results should be added here only after those experiments have been completed and checked.
+The data pipeline, model implementations, training workflow, evaluation pipeline, and automated tests are implemented.
+
+A complete ResNet1D training run on PTB-XL v1.0.3 has been completed. The best checkpoint was selected at epoch 22, achieving a validation macro F1 of 0.74779.
+
+Final evaluation on the held-out test set of 2,158 ECG recordings achieved a macro F1 of 0.75474 and a macro AUROC of 0.93206.
+
+CNN1D versus ResNet1D benchmarking, additional reproducibility experiments, and deployment validation remain future work.
+
