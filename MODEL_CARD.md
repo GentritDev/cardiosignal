@@ -1,4 +1,3 @@
-:::writing{variant="document" id="73184"}
 # CardioSignal – Model Card
 
 ## 1. Model Overview
@@ -321,4 +320,3 @@ Potential future improvements include:
 Wagner, P., Strodthoff, N., Bousseljot, R., Samek, W., & Schaeffter, T. (2022). *PTB-XL, a large publicly available electrocardiography dataset* (version 1.0.3). PhysioNet. https://doi.org/10.13026/kfzx-aw45
 
 Wagner, P., et al. (2020). PTB-XL: A Large Publicly Available ECG Dataset. *Scientific Data*, 7, 154. https://doi.org/10.1038/s41597-020-0495-6
-:::
