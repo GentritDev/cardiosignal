@@ -125,7 +125,7 @@ Normalization statistics are written to `artifacts/normalization_stats.json`. Th
 - PyTorch compatible with your Python version and hardware (CPU, CUDA, or other supported accelerator)
 - Dependencies listed in `pyproject.toml`
 
-**PyTorch installation note:** PyTorch is not currently declared in `pyproject.toml`. Install the appropriate PyTorch build first using the official [PyTorch installation selector](https://pytorch.org/get-started/locally/). On hosted notebook platforms such as Kaggle, PyTorch is often already installed; verify it before installing another build.
+**PyTorch installation note:** PyTorch is declared as a project dependency in `pyproject.toml`. For GPU acceleration, make sure to use a PyTorch build compatible with your CUDA environment. Verify GPU availability with `torch.cuda.is_available()`.
 
 ## Setup
 
@@ -338,7 +338,7 @@ Also consider citing the original dataset paper:
 
 > Wagner, P., et al. (2020). PTB-XL: A Large Publicly Available ECG Dataset. *Scientific Data*, 7, 154. https://doi.org/10.1038/s41597-020-0495-6
 
-
+## Current project status
 The data pipeline, model implementations, training workflow, evaluation pipeline, and automated tests are implemented.
 
 A complete ResNet1D training run on PTB-XL v1.0.3 has been completed. The best checkpoint was selected at epoch 22, achieving a validation macro F1 of 0.74779.
